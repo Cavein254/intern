@@ -1,4 +1,4 @@
-import { getSessionsFromServer } from '@/utils/serversession';
+import { getSessionsFromServer } from '@/middleware/serversession';
 
 const page = async () => {
   const user = await getSessionsFromServer();

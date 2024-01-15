@@ -1,10 +1,9 @@
-import AdminPage from '../../admin'
 const page = () => {
   return (
     <div>
-        <AdminPage />
+      <h1>Admin</h1>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
