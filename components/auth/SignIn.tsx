@@ -50,6 +50,7 @@ const SignIn = () => {
         }
         window.location.replace('/dashboard');
       })
+
       .catch((e: any) => console.log(e));
   };
   return (
@@ -106,20 +107,19 @@ const SignIn = () => {
             )}
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-          
             <div>
               <Box className="main-box">
                 <Box>
-                <Image
-                  width={400}
-                  height={200}
-                  priority={true}
-                  alt="login"
-                  src="https://static.vecteezy.com/system/resources/previews/010/930/001/non_2x/google-logo-icon-illustration-free-vector.jpg"
-                  className="google-img"
-          />
+                  <Image
+                    width={400}
+                    height={200}
+                    priority={true}
+                    alt="login"
+                    src="https://static.vecteezy.com/system/resources/previews/010/930/001/non_2x/google-logo-icon-illustration-free-vector.jpg"
+                    className="google-img"
+                  />
                 </Box>
-                <Button variant="contained" onClick={()=> signIn()}>
+                <Button variant="contained" onClick={() => signIn()}>
                   SignIn with Google
                 </Button>
               </Box>
