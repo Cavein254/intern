@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { BsFan } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import Avator from '../avator/Avator';
 import Overlay from '../overlay/Overlay';
 import { HeaderLinks } from './LinkData';
 import './styles.css';
@@ -22,7 +23,6 @@ const StyledSignUp = styled(Button)`
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
-  console.log(session);
   const linkNavs = HeaderLinks.map((link) => {
     return (
       <span key={link.id} className="header-links">
@@ -59,7 +59,9 @@ const Header = () => {
           <Box className="header-links-wrapper">{linkNavs}</Box>
         </Box>
         {session ? (
-          <h1>Session Present</h1>
+          <Box>
+            <Avator session={session} />
+          </Box>
         ) : (
           <Box className="header-btns">
             <Box>
