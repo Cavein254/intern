@@ -9,9 +9,7 @@ import './styles.css';
 
 const SignUp = () => {
   const [quote, setQuote] = useState({});
-  const {data: session} = useSession();
-  console.log({session})
-  console.log(session?.user?.image)
+  const { data: session } = useSession();
   return (
     <Box className="auth">
       <Box
@@ -46,41 +44,40 @@ const SignUp = () => {
             </Typography>
           </Box>
           <form>
-             {session ? 
-             (
+            {session ? (
               <Box>
                 <Box className="container-user-img">
-                <Image
-                  width={150}
-                  height={150}
-                  priority={true}
-                  alt="user image"
-                  src={session.user.image}
-                  className="user-img"
-                />
+                  <Image
+                    width={150}
+                    height={150}
+                    priority={true}
+                    alt="user image"
+                    src={session.user.image}
+                    className="user-img"
+                  />
                 </Box>
                 <Box className="container-user-text">
-                  <Typography variant='h4'>Welcome {session.user.name}!</Typography>
+                  <Typography variant="h4">
+                    Welcome {session.user.name}!
+                  </Typography>
                 </Box>
-              
+              </Box>
+            ) : (
+              ' '
+            )}
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: 'Dancing Script',
+                }}
+              ></Typography>
             </Box>
-             ): " "
-             }
-             <Box>
-              <Typography sx={{
-                  fontFamily:"Dancing Script"
-                }}></Typography>
-             </Box>
-             <Box>
-              <Link href='/dashboard'>
-              <Button>
-                Forward
-              </Button>
+            <Box>
+              <Link href="/dashboard">
+                <Button>Forward</Button>
               </Link>
-              
-             </Box>
+            </Box>
           </form>
-
         </Box>
       </Box>
     </Box>

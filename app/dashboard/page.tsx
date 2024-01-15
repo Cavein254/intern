@@ -7,7 +7,7 @@ const page = async () => {
   const { user } = await getServerSession(authOptions);
   const position = user?.position;
   // const { position } = session?.user;
-  if (position === 'employer') {
+  if (position === 'EMPLOYER') {
     redirect('/employer');
   }
 

@@ -58,27 +58,31 @@ const Header = () => {
         <Box className="header-links-container">
           <Box className="header-links-wrapper">{linkNavs}</Box>
         </Box>
-        <Box className="header-btns">
-          <Box>
-            <Link href="/signin" className="header-link">
-              <Button
-                variant="text"
-                className="header-login-btn"
-                sx={{
-                  marginRight: '0.4rem',
-                  fontSize: '1rem',
-                }}
-              >
-                Log In
-              </Button>
-            </Link>
+        {session ? (
+          <h1>Session Present</h1>
+        ) : (
+          <Box className="header-btns">
+            <Box>
+              <Link href="/signin" className="header-link">
+                <Button
+                  variant="text"
+                  className="header-login-btn"
+                  sx={{
+                    marginRight: '0.4rem',
+                    fontSize: '1rem',
+                  }}
+                >
+                  Log In
+                </Button>
+              </Link>
+            </Box>
+            <Box>
+              <Link href="/signup" className="header-link">
+                <StyledSignUp variant="contained">Sign Up</StyledSignUp>
+              </Link>
+            </Box>
           </Box>
-          <Box>
-            <Link href="/signup" className="header-link">
-              <StyledSignUp variant="contained">Sign Up</StyledSignUp>
-            </Link>
-          </Box>
-        </Box>
+        )}
       </Box>
     </Box>
   );
