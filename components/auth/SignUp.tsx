@@ -152,7 +152,12 @@ const SignUp = () => {
                 />
               </div>
               <div>
-                <FormControl fullWidth>
+                <FormControl
+                  fullWidth
+                  sx={{
+                    marginBottom: '1rem',
+                  }}
+                >
                   <InputLabel id="demo-simple-select-label">
                     Apply As
                   </InputLabel>
