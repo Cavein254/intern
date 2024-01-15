@@ -1,14 +1,17 @@
-"use client"
 import Dashboard from '@/components/dashboard/Dashboard';
-import { useSession } from "next-auth/react";
+import { authOptions } from '@/utils/nextauth';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
+const page = async () => {
+  const { user } = await getServerSession(authOptions);
+  const position = user?.position;
+  // const { position } = session?.user;
+  if (position === 'EMPLOYER') {
+    redirect('/employer');
+  }
 
-const page = () => {
-  const { data: session, status } = useSession()
-  console.log(session);
-  return (
-    <Dashboard />
-  )
-}
+  return <Dashboard />;
+};
 
-export default page
+export default page;

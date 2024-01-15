@@ -168,8 +168,8 @@ const SignUp = () => {
                     label="Apply as"
                     onChange={(e) => handledropDown(e)}
                   >
-                    <MenuItem value={'intern'}>Intern</MenuItem>
-                    <MenuItem value={'employer'}>Employer</MenuItem>
+                    <MenuItem value={'INTERN'}>Intern</MenuItem>
+                    <MenuItem value={'EMPLOYER'}>Employer</MenuItem>
                   </Select>
                 </FormControl>
               </div>

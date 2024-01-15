@@ -1,3 +1,9 @@
+-- CreateEnum
+CREATE TYPE "Position" AS ENUM ('INTERN', 'EMPLOYER');
+
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
+
 -- CreateTable
 CREATE TABLE "Account" (
     "id" TEXT NOT NULL,
@@ -31,10 +37,12 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT,
-    "password" TEXT,
-    "position" TEXT NOT NULL,
+    "positions" "Position" NOT NULL DEFAULT 'INTERN',
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
+    "roles" "Role" NOT NULL DEFAULT 'USER',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
