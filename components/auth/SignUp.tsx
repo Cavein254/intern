@@ -58,8 +58,7 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const newData = data;
     newData.position = dropdownValue;
-    console.log(newData);
-    const { data: responses } = await axios.post('/api/auth/signup', data);
+    const { data: responses } = await axios.post('/api/auth/signup', newData);
     const { status } = responses;
     if (status !== 'success') {
       setError('Failed to Create User');
