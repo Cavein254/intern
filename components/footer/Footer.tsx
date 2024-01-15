@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <Box
       sx={{
@@ -8,7 +9,7 @@ const Footer = () => {
         justifyContent: 'center',
       }}
     >
-      <Box> &copy; 2023 GPOL Career Agency. All rights reserved.</Box>
+      <Box> &copy; {year} IC Career Agency. All rights reserved.</Box>
     </Box>
   );
 };

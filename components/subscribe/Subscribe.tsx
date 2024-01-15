@@ -38,7 +38,7 @@ const Subscribe = () => {
         >
           Are you ready to supercharge your professional journey? Don't miss out
           on exclusive insights, expert tips, and game-changing strategies
-          delivered right to your inbox through the GPOL Newsletter!
+          delivered right to your inbox through the IC Newsletter!
         </Typography>
         <Box
           sx={{
