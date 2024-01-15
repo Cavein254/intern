@@ -4,8 +4,7 @@ import { redirect } from 'next/navigation';
 
 const page = async () => {
   const user = await getSessionsFromServer();
-  const position = user?.position;
-  // const { position } = session?.user;
+  const { position } = user;
   if (position === 'EMPLOYER') {
     redirect('/employer');
   }

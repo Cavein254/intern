@@ -1,9 +1,12 @@
-import { useSession } from 'next-auth/react';
+import { getSessionsFromServer } from '@/utils/serversession';
 
-const page = () => {
-  const { data: session } = useSession();
-  console.log(session);
-  return <div></div>;
+const page = async () => {
+  const user = await getSessionsFromServer();
+  return (
+    <div>
+      {user ? <h1>Welcome Employer </h1> : <h1>Unauthorized Access</h1>}
+    </div>
+  );
 };
 
 export default page;
