@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { Box, Button, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useSession } from 'next-auth/react';
@@ -20,10 +20,9 @@ const StyledSignUp = styled(Button)`
   }
 `;
 const Header = () => {
-
   const [isOpen, setIsOpen] = useState(false);
-  const {data:session} = useSession();
-  console.log(session)
+  const { data: session } = useSession();
+  console.log(session);
   const linkNavs = HeaderLinks.map((link) => {
     return (
       <span key={link.id} className="header-links">
@@ -53,7 +52,7 @@ const Header = () => {
               fontSize: '1.8rem',
             }}
           >
-            GPOL
+            IC
           </Typography>
         </Box>
         <Box className="header-links-container">
@@ -61,23 +60,23 @@ const Header = () => {
         </Box>
         <Box className="header-btns">
           <Box>
-          <Link href="/signin" className="header-link">
-            <Button
-              variant="text"
-              className="header-login-btn"
-              sx={{
-                marginRight: '0.4rem',
-                fontSize: '1rem',
-              }}
-            >
-              Log In
-            </Button>
-          </Link>
+            <Link href="/signin" className="header-link">
+              <Button
+                variant="text"
+                className="header-login-btn"
+                sx={{
+                  marginRight: '0.4rem',
+                  fontSize: '1rem',
+                }}
+              >
+                Log In
+              </Button>
+            </Link>
           </Box>
           <Box>
-          <Link href="/signup" className="header-link">
-            <StyledSignUp variant="contained">Sign Up</StyledSignUp>
-          </Link>
+            <Link href="/signup" className="header-link">
+              <StyledSignUp variant="contained">Sign Up</StyledSignUp>
+            </Link>
           </Box>
         </Box>
       </Box>
@@ -86,5 +85,3 @@ const Header = () => {
 };
 
 export default Header;
-
-

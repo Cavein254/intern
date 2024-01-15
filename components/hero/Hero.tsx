@@ -18,7 +18,8 @@ const Hero = () => {
               fontWeight: '400',
             }}
           >
-            Empower Your Career Journey with <span className="gpol">GPOL</span>
+            Empower Your Career Journey with{' '}
+            <span className="gpol">INTERN CONNECT</span>
           </Typography>
           <Typography
             variant="h5"
@@ -47,7 +48,13 @@ const Hero = () => {
         </Box>
       </Box>
       <Box className="hero-img-container">
-        <Image height={300} width={300} src="/images/hero.jpg" alt="Hero" className="hero-img" />
+        <Image
+          height={300}
+          width={300}
+          src="/images/hero.jpg"
+          alt="Hero"
+          className="hero-img"
+        />
       </Box>
     </Box>
   );

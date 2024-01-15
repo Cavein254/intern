@@ -29,7 +29,7 @@ const About = () => {
               fontWeight: '400',
             }}
           >
-            About GPOL Career Agency
+            About IC Career Agency
           </Typography>
           <Typography
             variant="body1"
@@ -38,18 +38,24 @@ const About = () => {
               fontWeight: '200',
             }}
           >
-            A beacon of professional growth and guidance, GPOL is committed to
+            A beacon of professional growth and guidance, IC is committed to
             empowering individuals in their pursuit of fulfilling careers. With
             a focus on personalized strategies, their expert team offers a range
             of services designed to unlock potential, from career assessments to
-            resume enhancement. At GPOL, one size does not fit all. Our approach
+            resume enhancement. At IC, one size does not fit all. Our approach
             is rooted in understanding each individual's unique strengths and
             aspirations, ensuring that every client receives tailored advice and
             support that resonates with their journey.
           </Typography>
         </Box>
         <Box className="about-us-img-container">
-          <Image height={300} width={300}  src={AboutImg} alt="aboutus" className="about-us-img" />
+          <Image
+            height={300}
+            width={300}
+            src={AboutImg}
+            alt="aboutus"
+            className="about-us-img"
+          />
         </Box>
       </Box>
     </Box>
