@@ -12,7 +12,7 @@ const Avator = ({ session }) => {
       {image !== null ? (
         <Avatar src={image} alt={name} />
       ) : (
-        <Avatar src={''} alt={name} />
+        <Avatar src={noImage} alt={name} />
       )}
     </Box>
   );
