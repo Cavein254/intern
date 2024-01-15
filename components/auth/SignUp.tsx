@@ -1,6 +1,16 @@
 'use client';
 
-import { Box, Button, TextField, Typography, styled } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+  styled,
+} from '@mui/material';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -27,7 +37,7 @@ const CustomTextField = styled(TextField)({
 type FormValues = {
   username: string;
   email: string;
-  password: string;
+  position: string;
 };
 const SignUp = () => {
   const {
@@ -36,23 +46,29 @@ const SignUp = () => {
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-        username:'',
-        email: '',
-        password: '',
+      username: '',
+      email: '',
     },
   });
   const [error, setError] = useState('');
-  const [ServerResponse,setServerResponse] = useState('')
-  const router = useRouter()
+  const [ServerResponse, setServerResponse] = useState('');
+  const [dropdownValue, setdropdownValue] = useState('');
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<FormValues> = async(data) => {
-    const {data:responses} = await axios.post('/api/auth/signup',data);
-    const {status} = responses;
-    if(status !== 'success') {
-      setError("Failed to Create User")
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const newData = data;
+    newData.position = dropdownValue;
+    const { data: responses } = await axios.post('/api/auth/signup', newData);
+    const { status } = responses;
+    if (status !== 'success') {
+      setError('Failed to Create User');
       return;
     }
-    router.push('/signin')
+    router.push('/signin');
+  };
+  const handledropDown = (e) => {
+    e.preventDefault();
+    setdropdownValue(e.target.value);
   };
   return (
     <Box className="auth">
@@ -109,7 +125,7 @@ const SignUp = () => {
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-            <div>
+              <div>
                 <CustomTextField
                   variant="outlined"
                   fullWidth
@@ -136,6 +152,28 @@ const SignUp = () => {
                 />
               </div>
               <div>
+                <FormControl
+                  fullWidth
+                  sx={{
+                    marginBottom: '1rem',
+                  }}
+                >
+                  <InputLabel id="demo-simple-select-label">
+                    Apply As
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={dropdownValue}
+                    label="Apply as"
+                    onChange={(e) => handledropDown(e)}
+                  >
+                    <MenuItem value={'intern'}>Intern</MenuItem>
+                    <MenuItem value={'employer'}>Employer</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              {/* <div>
                 <CustomTextField
                   type="password"
                   placeholder="password"
@@ -145,10 +183,11 @@ const SignUp = () => {
                   error={!!errors.password}
                   helperText={errors.password?.message}
                 />
-              </div>
+              </div> */}
               <div className="auth-btn-container">
                 <Button variant="contained" type="submit">
-                  Register <BsFillArrowRightCircleFill className="auth-btn-icon" />
+                  Register{' '}
+                  <BsFillArrowRightCircleFill className="auth-btn-icon" />
                 </Button>
               </div>
             </div>
