@@ -40,6 +40,7 @@
     "react-hook-form": "^7.46.1",
     "react-icons": "^4.11.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.16.0",
     "sharp": "^0.32.5",
     "typescript": "5.2.2",

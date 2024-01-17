@@ -7,9 +7,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
   Typography,
-  styled,
 } from '@mui/material';
 import axios from 'axios';
 import Image from 'next/image';
@@ -18,21 +16,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
+import { CustomTextField } from '../missilenious/TextFieldItems';
 import './styles.css';
-
-const CustomTextField = styled(TextField)({
-  fontFamily: 'Lato',
-  fontWeight: 400,
-  fontSize: '1.2rem',
-  marginBottom: '1rem',
-  width: '100%',
-  '&:active': {
-    border: 'black',
-  },
-  '&.Mui-active': {
-    border: 'none',
-  },
-});
 
 type FormValues = {
   username: string;

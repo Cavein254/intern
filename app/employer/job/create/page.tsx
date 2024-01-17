@@ -1,7 +1,9 @@
+import CreateJob from '@/components/dashboard/job/CreateJob';
+
 const page = () => {
   return (
     <div>
-      <h1>Admin</h1>
+      <CreateJob />
     </div>
   );
 };

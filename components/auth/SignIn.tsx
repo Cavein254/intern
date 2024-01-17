@@ -1,8 +1,9 @@
 'use client';
 
 import { Box, Button, TextField, Typography, styled } from '@mui/material';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './styles.css';
@@ -26,6 +27,10 @@ type FormValues = {
   password: string;
 };
 const SignIn = () => {
+  const { data: session } = useSession();
+  if (session) {
+    redirect('/dashboard');
+  }
   const {
     register,
     handleSubmit,
