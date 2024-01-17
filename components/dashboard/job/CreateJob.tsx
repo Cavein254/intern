@@ -9,6 +9,7 @@ import {
   Select,
   Typography,
 } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -19,6 +20,7 @@ const CreateJob = () => {
   const [engagement, setEngagement] = useState('FULLTIME');
   const [locationType, setLocation] = useState('ONSITE');
   const [jobType, setJob] = useState('PERMANENT');
+  const [expiresAt, setExpiresAt] = useState(Date.now());
 
   const handleChangeLocation = (e) => {
     e.preventDefault();
@@ -122,7 +124,11 @@ const CreateJob = () => {
             <MenuItem value={'PIECEWORK'}>PieceWork</MenuItem>
           </Select>
         </FormControl>
-
+        <DatePicker
+          label="Application Deadline"
+          value={expiresAt}
+          onChange={(e) => setExpiresAt((e) => e.target.value)}
+        />
         <Box>
           <Typography
             variant="h4"
