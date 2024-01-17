@@ -18,12 +18,17 @@ const CreateJob = () => {
   const [description, setDescription] = useState('');
   const [details, setDetails] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
-  const [location, setLocation] = useState('ONSITE');
-  const [age, setAge] = useState(0);
+  const [locationType, setLocation] = useState('ONSITE');
+  const [jobType, setJob] = useState('PERMANENT');
 
   const handleChangeLocation = (e) => {
     e.preventDefault();
-    setEngagement(e.target.value);
+    setLocation(e.target.value);
+  };
+
+  const handleChangeJobType = (e) => {
+    e.preventDefault();
+    setJob(e.target.value);
   };
 
   const handleChangeEngagement = (e) => {
@@ -44,12 +49,14 @@ const CreateJob = () => {
           fullWidth
           type="text"
           placeholder="Job Title"
+          required
         />
         <CustomTextField
           variant="filled"
           fullWidth
           type="text"
           placeholder="Job Position"
+          required
         />
         <FormControl
           fullWidth
@@ -61,8 +68,9 @@ const CreateJob = () => {
           <Select
             labelId="location"
             id="location-select"
-            value=""
+            value={locationType}
             label="Apply as"
+            onChange={handleChangeLocation}
           >
             <MenuItem value={'HYBRID'}>Hybrid</MenuItem>
             <MenuItem value={'ONSITE'}>OnSite</MenuItem>
@@ -79,8 +87,9 @@ const CreateJob = () => {
           <Select
             labelId="jobType"
             id="jobType-select"
-            value=""
+            value={jobType}
             label="Job Type"
+            onChange={handleChangeJobType}
           >
             <MenuItem value={'PERMANENT'}>Permanent</MenuItem>
             <MenuItem value={'TEMPORARY'}>Temporary</MenuItem>
