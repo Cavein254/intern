@@ -16,7 +16,6 @@ import 'react-quill/dist/quill.snow.css';
 const CreateJob = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [details, setDetails] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
   const [locationType, setLocation] = useState('ONSITE');
   const [jobType, setJob] = useState('PERMANENT');
@@ -36,6 +35,17 @@ const CreateJob = () => {
     setEngagement(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userData = {
+      title,
+      jobType,
+      locationType,
+      engagement,
+      description,
+    };
+    console.log(userData);
+  };
   return (
     <Box
       sx={{
@@ -43,20 +53,15 @@ const CreateJob = () => {
         mx: '4%',
       }}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <CustomTextField
           variant="filled"
           fullWidth
           type="text"
           placeholder="Job Title"
           required
-        />
-        <CustomTextField
-          variant="filled"
-          fullWidth
-          type="text"
-          placeholder="Job Position"
-          required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <FormControl
           fullWidth
@@ -134,7 +139,9 @@ const CreateJob = () => {
             onChange={setDescription}
           />
         </Box>
-        <Button variant="contained">Submit</Button>
+        <Button variant="contained" type="submit">
+          Submit
+        </Button>
       </form>
     </Box>
   );
