@@ -13,6 +13,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -23,7 +24,7 @@ const CreateJob = () => {
   const [engagement, setEngagement] = useState('FULLTIME');
   const [locationType, setLocation] = useState('ONSITE');
   const [jobType, setJob] = useState('PERMANENT');
-  const [expiresAt, setExpiresAt] = useState(Date.now());
+  const [expiresAt, setExpiresAt] = useState(dayjs(Date.now()));
 
   const handleChangeLocation = (e) => {
     e.preventDefault();
@@ -48,6 +49,7 @@ const CreateJob = () => {
       locationType,
       engagement,
       description,
+      expiresAt,
     };
     console.log(userData);
   };
@@ -60,7 +62,7 @@ const CreateJob = () => {
     >
       <form onSubmit={handleSubmit}>
         <CustomTextField
-          variant="filled"
+          variant="outlined"
           fullWidth
           type="text"
           placeholder="Job Title"
@@ -133,7 +135,7 @@ const CreateJob = () => {
             <DatePicker
               label="Application Deadline"
               value={expiresAt}
-              onChange={(e) => setExpiresAt((e) => e.target.value)}
+              onChange={(newValue) => setExpiresAt(newValue)}
             />
           </DemoContainer>
         </LocalizationProvider>
@@ -142,7 +144,8 @@ const CreateJob = () => {
             variant="h4"
             sx={{
               color: 'gray',
-              fontSize: '1.4rem',
+              fontSize: '0.8rem',
+              mt: '2rem',
             }}
           >
             Enter Details
