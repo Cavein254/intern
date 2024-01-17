@@ -14,26 +14,17 @@ export async function signup(req: Request) {
           email,
         },
       });
-      return new NextResponse(
-        JSON.stringify({
-          status: 'success',
-          payload: user,
-        })
-      );
+      return NextResponse.json({ user }, { status: 200 });
     } catch (err) {
-      return new NextResponse(
-        JSON.stringify({
-          status: 'failed',
-          payload: err,
-        })
+      return NextResponse.json(
+        { error: 'Failed to Create User' },
+        { status: 500 }
       );
     }
   } else {
-    return new NextResponse(
-      JSON.stringify({
-        status: 'failed',
-        payload: 'only POST requests supported',
-      })
+    return NextResponse.json(
+      { error: 'Only Post method allowed for this route' },
+      { status: 504 }
     );
   }
 }

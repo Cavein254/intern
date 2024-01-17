@@ -1,5 +1,5 @@
+import prisma from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '../db';
 
 export default async function ServerCreateJob(
   req: NextRequest,
@@ -13,9 +13,6 @@ export default async function ServerCreateJob(
     });
     return NextResponse.json(job);
   } catch (err) {
-    return NextResponse.json({
-      error: true,
-      err,
-    });
+    return NextResponse.json({ error: err }, { status: 500 });
   }
 }
