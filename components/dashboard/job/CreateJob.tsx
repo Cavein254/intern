@@ -9,6 +9,11 @@ import {
   Select,
   Typography,
 } from '@mui/material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -16,14 +21,19 @@ import 'react-quill/dist/quill.snow.css';
 const CreateJob = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [details, setDetails] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
-  const [location, setLocation] = useState('ONSITE');
-  const [age, setAge] = useState(0);
+  const [locationType, setLocation] = useState('ONSITE');
+  const [jobType, setJob] = useState('PERMANENT');
+  const [expiresAt, setExpiresAt] = useState(dayjs(Date.now()));
 
   const handleChangeLocation = (e) => {
     e.preventDefault();
-    setEngagement(e.target.value);
+    setLocation(e.target.value);
+  };
+
+  const handleChangeJobType = (e) => {
+    e.preventDefault();
+    setJob(e.target.value);
   };
 
   const handleChangeEngagement = (e) => {
@@ -31,6 +41,22 @@ const CreateJob = () => {
     setEngagement(e.target.value);
   };
 
+  const myDate = () => {
+    const newDate = dayjs(expiresAt).format('MM/DD/YYYY');
+    return newDate;
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userData = {
+      title,
+      jobType,
+      locationType,
+      engagement,
+      description,
+      expiresAt: myDate(),
+    };
+    console.log(userData);
+  };
   return (
     <Box
       sx={{
@@ -38,18 +64,15 @@ const CreateJob = () => {
         mx: '4%',
       }}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <CustomTextField
-          variant="filled"
+          variant="outlined"
           fullWidth
           type="text"
           placeholder="Job Title"
-        />
-        <CustomTextField
-          variant="filled"
-          fullWidth
-          type="text"
-          placeholder="Job Position"
+          required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <FormControl
           fullWidth
@@ -61,8 +84,9 @@ const CreateJob = () => {
           <Select
             labelId="location"
             id="location-select"
-            value=""
+            value={locationType}
             label="Apply as"
+            onChange={handleChangeLocation}
           >
             <MenuItem value={'HYBRID'}>Hybrid</MenuItem>
             <MenuItem value={'ONSITE'}>OnSite</MenuItem>
@@ -79,8 +103,9 @@ const CreateJob = () => {
           <Select
             labelId="jobType"
             id="jobType-select"
-            value=""
+            value={jobType}
             label="Job Type"
+            onChange={handleChangeJobType}
           >
             <MenuItem value={'PERMANENT'}>Permanent</MenuItem>
             <MenuItem value={'TEMPORARY'}>Temporary</MenuItem>
@@ -109,12 +134,22 @@ const CreateJob = () => {
           </Select>
         </FormControl>
 
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['DatePicker']}>
+            <DatePicker
+              label="Application Deadline"
+              value={expiresAt}
+              onChange={(newValue) => setExpiresAt(newValue)}
+            />
+          </DemoContainer>
+        </LocalizationProvider>
         <Box>
           <Typography
             variant="h4"
             sx={{
               color: 'gray',
-              fontSize: '1.4rem',
+              fontSize: '0.8rem',
+              mt: '2rem',
             }}
           >
             Enter Details
@@ -125,7 +160,9 @@ const CreateJob = () => {
             onChange={setDescription}
           />
         </Box>
-        <Button variant="contained">Submit</Button>
+        <Button variant="contained" type="submit">
+          Submit
+        </Button>
       </form>
     </Box>
   );
