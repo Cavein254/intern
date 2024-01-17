@@ -14,7 +14,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
@@ -56,7 +55,6 @@ const CreateJob = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const data = {
-      title,
       jobType,
       locationType,
       engagement,
@@ -64,10 +62,9 @@ const CreateJob = () => {
       expiresAt: myDate(),
       userId: id,
     };
-    axios
-      .post('/api/job/create', {
-        data,
-      })
+    fetch('/api/job/create', {
+      data,
+    })
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   };

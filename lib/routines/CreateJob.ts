@@ -6,16 +6,14 @@ export default async function ServerCreateJob(
   res: NextResponse
 ) {
   const userData = await req.json();
-  console.log('"""""""""""first"""""""""""');
   const { data } = userData;
-  console.log(data);
   try {
     const job = await prisma.job.create({
       data,
     });
-    return job;
+    return NextResponse.json(job);
   } catch (err) {
-    console.log({
+    return NextResponse.json({
       error: true,
       err,
     });
