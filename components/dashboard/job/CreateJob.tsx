@@ -9,7 +9,10 @@ import {
   Select,
   Typography,
 } from '@mui/material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -124,11 +127,16 @@ const CreateJob = () => {
             <MenuItem value={'PIECEWORK'}>PieceWork</MenuItem>
           </Select>
         </FormControl>
-        <DatePicker
-          label="Application Deadline"
-          value={expiresAt}
-          onChange={(e) => setExpiresAt((e) => e.target.value)}
-        />
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['DatePicker']}>
+            <DatePicker
+              label="Application Deadline"
+              value={expiresAt}
+              onChange={(e) => setExpiresAt((e) => e.target.value)}
+            />
+          </DemoContainer>
+        </LocalizationProvider>
         <Box>
           <Typography
             variant="h4"
