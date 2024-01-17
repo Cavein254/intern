@@ -41,6 +41,10 @@ const CreateJob = () => {
     setEngagement(e.target.value);
   };
 
+  const myDate = () => {
+    const newDate = dayjs(expiresAt).format('MM/DD/YYYY');
+    return newDate;
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = {
@@ -49,7 +53,7 @@ const CreateJob = () => {
       locationType,
       engagement,
       description,
-      expiresAt,
+      expiresAt: myDate(),
     };
     console.log(userData);
   };
