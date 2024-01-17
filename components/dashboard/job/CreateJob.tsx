@@ -1,5 +1,6 @@
 'use client';
 import { CustomTextField } from '@/components/missilenious/TextFieldItems';
+
 import {
   Box,
   Button,
@@ -13,12 +14,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import axios from 'axios';
 import dayjs from 'dayjs';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const CreateJob = () => {
+  const { data: session } = useSession();
+  const { user } = session;
+  const { id } = user;
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
@@ -45,18 +52,26 @@ const CreateJob = () => {
     const newDate = dayjs(expiresAt).format('MM/DD/YYYY');
     return newDate;
   };
-  const handleSubmit = (e) => {
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    const userData = {
+    const data = {
       title,
       jobType,
       locationType,
       engagement,
       description,
       expiresAt: myDate(),
+      userId: id,
     };
-    console.log(userData);
+    axios
+      .post('/api/job/create', {
+        data,
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
+
   return (
     <Box
       sx={{
@@ -64,7 +79,7 @@ const CreateJob = () => {
         mx: '4%',
       }}
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <CustomTextField
           variant="outlined"
           fullWidth
