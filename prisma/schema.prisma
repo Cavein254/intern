@@ -103,12 +103,13 @@ enum Engagement {
 
 model Job {
   id           String       @id @default(cuid())
-  position     String
+  title     String
   jobType      JobType      @default(TEMPORARY)
   locationType LocationType @default(ONSITE)
   industry     String?
   engagement   Engagement   @default(FULLTIME)
   salary       String?
+  description String?
 
   expiresAt DateTime
   createdAt DateTime @default(now())

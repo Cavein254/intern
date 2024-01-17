@@ -1,16 +1,35 @@
+'use client';
 import { CustomTextField } from '@/components/missilenious/TextFieldItems';
 import {
   Box,
-  Checkbox,
+  Button,
   FormControl,
-  FormControlLabel,
-  FormGroup,
   InputLabel,
   MenuItem,
   Select,
+  Typography,
 } from '@mui/material';
+import { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const CreateJob = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [details, setDetails] = useState('');
+  const [engagement, setEngagement] = useState('uuuuuuu');
+  const [age, setAge] = useState(0);
+
+  const handleChangeEngagement = (e) => {
+    e.preventDefault();
+    console.log({ value: e.target.value });
+    setEngagement(e.target.value);
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setAge(e.target.value);
+  };
   return (
     <Box
       sx={{
@@ -79,22 +98,33 @@ const CreateJob = () => {
           <Select
             labelId="engagement"
             id="engagement-select"
-            value=""
+            value={engagement}
             label="Engagement"
+            onChange={handleChangeEngagement}
           >
             <MenuItem value={'FULLTIME'}>FullTime</MenuItem>
             <MenuItem value={'PARTTIME'}>PartTime</MenuItem>
             <MenuItem value={'PIECEWORK'}>PieceWork</MenuItem>
           </Select>
         </FormControl>
-        <FormGroup>
-          <InputLabel id="Salary">Salary</InputLabel>
-          <FormControlLabel control={<Checkbox />} label="0-10,000" />
-          <FormControlLabel control={<Checkbox />} label="10,000-30,000" />
-          <FormControlLabel control={<Checkbox />} label="30,000-50,000" />
-          <FormControlLabel control={<Checkbox />} label="50,000-100,000" />
-          <FormControlLabel control={<Checkbox />} label="Above 100,000" />
-        </FormGroup>
+
+        <Box>
+          <Typography
+            variant="h4"
+            sx={{
+              color: 'gray',
+              fontSize: '1.4rem',
+            }}
+          >
+            Enter Details
+          </Typography>
+          <ReactQuill
+            theme="snow"
+            value={description}
+            onChange={setDescription}
+          />
+        </Box>
+        <Button variant="contained">Submit</Button>
       </form>
     </Box>
   );
