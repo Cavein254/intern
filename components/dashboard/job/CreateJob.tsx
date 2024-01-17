@@ -17,19 +17,20 @@ const CreateJob = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [details, setDetails] = useState('');
-  const [engagement, setEngagement] = useState('uuuuuuu');
+  const [engagement, setEngagement] = useState('FULLTIME');
+  const [location, setLocation] = useState('ONSITE');
   const [age, setAge] = useState(0);
 
-  const handleChangeEngagement = (e) => {
+  const handleChangeLocation = (e) => {
     e.preventDefault();
-    console.log({ value: e.target.value });
     setEngagement(e.target.value);
   };
 
-  const handleChange = (e) => {
+  const handleChangeEngagement = (e) => {
     e.preventDefault();
-    setAge(e.target.value);
+    setEngagement(e.target.value);
   };
+
   return (
     <Box
       sx={{
