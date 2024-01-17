@@ -110,6 +110,7 @@ model Job {
   engagement   Engagement   @default(FULLTIME)
   salary       String?
   description String?
+  expiry DateTime
 
   expiresAt DateTime
   createdAt DateTime @default(now())
