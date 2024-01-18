@@ -4,7 +4,7 @@ import './styles.css';
 import { TeamData } from './teamdata';
 
 const Team = () => {
-  const teams = TeamData.map((team) => {
+  const teams = TeamData?.map((team) => {
     return (
       <Box className="team-container" key={team.id} id="contact">
         <Box className="team-details">

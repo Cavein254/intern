@@ -10,6 +10,7 @@ import Avator from '../avator/Avator';
 import Overlay from '../overlay/Overlay';
 import { HeaderLinks } from './LinkData';
 import './styles.css';
+
 const StyledSignUp = styled(Button)`
   background-color: #ff6600;
   color: #fff;

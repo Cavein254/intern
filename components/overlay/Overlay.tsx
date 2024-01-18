@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { Box, Stack } from '@mui/system';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { BsFan } from 'react-icons/bs';
@@ -10,7 +10,7 @@ import './styles.css';
 
 type Props = {
   isOpen: Boolean;
-  setIsOpen(value: Boolean): () => void;
+  setIsOpen: (value: Boolean | any) => void;
 };
 const Overlay = ({ isOpen, setIsOpen }: Props) => {
   const links = HeaderLinks.map((link) => {
