@@ -21,14 +21,14 @@ import 'react-quill/dist/quill.snow.css';
 
 const CreateJob = () => {
   const { data: session } = useSession();
-  const { user } = session;
-  const { id } = user;
+  console.log(session);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
   const [locationType, setLocation] = useState('ONSITE');
   const [jobType, setJob] = useState('PERMANENT');
   const [expiresAt, setExpiresAt] = useState(dayjs(Date.now()));
+  const [error, setError] = useState('');
 
   const handleChangeLocation = (e) => {
     e.preventDefault();
@@ -67,7 +67,10 @@ const CreateJob = () => {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log('rr');
+        console.log(response.status);
+      })
       .catch((err) => console.log(err));
   };
   return (

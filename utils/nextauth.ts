@@ -23,10 +23,10 @@ export const authOptions: AuthOptions = {
       return newUrl;
     },
     async session({ session, user, token }) {
-      return {
-        session,
-        user,
-      };
+      session.userId = user.id;
+      session.position = user.position;
+      session.role = user.role;
+      return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       return token;

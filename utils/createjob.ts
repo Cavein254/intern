@@ -7,7 +7,7 @@ export async function ServerCreateJob(req: NextRequest, res: NextResponse) {
     const job = await prisma.job.create({
       data,
     });
-    return NextResponse.json(job);
+    return NextResponse.json({ ok: 'success' }, { status: 200 });
   } catch (err) {
     console.log(err);
     return NextResponse.json({ error: err }, { status: 500 });
