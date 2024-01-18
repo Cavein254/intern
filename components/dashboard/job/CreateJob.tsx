@@ -15,11 +15,15 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
-import ReactQuill from 'react-quill';
+import dynamic from 'next/dynamic';
+import { useMemo, useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 
 const CreateJob = () => {
+  const ReactQuill = useMemo(
+    () => dynamic(() => import('react-quill'), { ssr: false }),
+    []
+  );
   const { data: session } = useSession();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
