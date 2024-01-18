@@ -21,7 +21,6 @@ import 'react-quill/dist/quill.snow.css';
 
 const CreateJob = () => {
   const { data: session } = useSession();
-  console.log(session);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
@@ -58,7 +57,7 @@ const CreateJob = () => {
       engagement,
       description,
       expiresAt: myDate(),
-      userId: id,
+      userId: session?.userId,
     };
     fetch('/api/job/create', {
       method: 'POST',
@@ -68,10 +67,13 @@ const CreateJob = () => {
       body: JSON.stringify(data),
     })
       .then((response) => {
-        console.log('rr');
-        console.log(response.status);
+        if (response.status === 200) {
+          window.location.replace('/dashboard');
+        } else {
+          setError('An Error occured saving data to the database');
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError('Unable to connect to database'));
   };
   return (
     <Box
@@ -80,6 +82,26 @@ const CreateJob = () => {
         mx: '4%',
       }}
     >
+      {error && (
+        <Box
+          sx={{
+            backgroundColor: 'red',
+            mx: '2rem',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              color: 'white',
+              fontSize: '0.8rem',
+            }}
+          >
+            {error}
+          </Typography>
+        </Box>
+      )}
       <form onSubmit={handleSubmit}>
         <CustomTextField
           variant="outlined"
