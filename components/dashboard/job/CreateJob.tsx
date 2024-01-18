@@ -47,7 +47,7 @@ const CreateJob = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = {
+    const data = {
       title,
       jobType,
       locationType,
@@ -55,6 +55,15 @@ const CreateJob = () => {
       description,
       expiresAt: myDate(),
     };
+    fetch('/api/job/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
   return (
     <Box
