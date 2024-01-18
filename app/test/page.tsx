@@ -2,13 +2,20 @@ import Footer from '@/components/footer/Footer';
 import Subscribe from '@/components/subscribe/Subscribe';
 import { Box } from '@mui/material';
 
-const page = () => {
+export default function Home() {
   return (
-    <Box>
+    <Box
+      sx={{
+        margin: '1rem',
+      }}
+    >
+      {/* <Hero />
+      <About />
+      <Services />
+      <Testimonials />
+      <Team /> */}
       <Subscribe />
       <Footer />
     </Box>
   );
-};
-
-export default page;
+}

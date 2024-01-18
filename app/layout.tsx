@@ -1,9 +1,7 @@
 'use client';
-import Header from '@/components/header/Header';
 import type { Metadata } from 'next';
 import { usePathname } from 'next/navigation';
 import './globals.css';
-import { Providers } from './provider';
 
 const metadata: Metadata = {
   title: 'INTERN CONNECT',
@@ -20,16 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>
-          {pathName === '/signin' ||
-          pathName === '/admin' ||
-          pathName === '/signup' ? (
-            ''
-          ) : (
-            <Header />
-          )}
-          {children}
-        </Providers>
+        {pathName === '/signin' ||
+        pathName === '/admin' ||
+        pathName === '/signup' ? (
+          ''
+        ) : (
+          // <Header />
+          <h1></h1>
+        )}
+        {children}
       </body>
     </html>
   );
