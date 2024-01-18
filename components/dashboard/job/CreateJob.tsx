@@ -14,11 +14,15 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const CreateJob = () => {
+  const { data: session } = useSession();
+  const { user } = session;
+  const { id } = user;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
@@ -54,6 +58,7 @@ const CreateJob = () => {
       engagement,
       description,
       expiresAt: myDate(),
+      userId: id,
     };
     fetch('/api/job/create', {
       method: 'POST',
