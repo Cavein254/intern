@@ -13,14 +13,11 @@ const Dashboard = () => {
   const fetchJobs = async () => {
     const response = await axios
       .get('/api/job')
-      .then((res) => console.log(res.data));
+      .then((res) => setJobs(res.data));
     return response;
   };
   useEffect(() => {
-    console.log('---------------------');
-    const jobs = fetchJobs();
-    console.log('---------------------');
-    console.log(jobs);
+    fetchJobs();
   }, []);
   const jobStats = [
     {
