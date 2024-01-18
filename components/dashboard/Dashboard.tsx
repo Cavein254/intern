@@ -1,21 +1,24 @@
-'use Client';
+'use client';
 import { Box, Card, Typography } from '@mui/material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { AiFillFilter } from 'react-icons/ai';
 import SearchOverlay from '../searchoverlay/SearchOverlay';
 import Job from './job/Job';
 import './styles.css';
 
 const Dashboard = () => {
-  const jobs = () => {
-    fetch(`${process.env.NEXT_APP_URL}/api/job`, {
-      method: 'GET',
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+  const [jobs, setJobs] = useState([]);
+
+  const fetchJobs = async () => {
+    const response = await axios
+      .get('/api/job')
+      .then((res) => setJobs(res.data));
+    return response;
   };
-  console.log('jobs');
-  console.log(jobs());
+  useEffect(() => {
+    fetchJobs();
+  }, []);
   const jobStats = [
     {
       id: 1,
@@ -150,10 +153,9 @@ const Dashboard = () => {
           </Box>
           <Box className="dashboard-jobs">
             <Box className="dashboard-job-list">
-              <Job />
-              <Job />
-              <Job />
-              <Job />
+              {jobs?.map((items) => (
+                <Job key={items.id} items={items} />
+              ))}
             </Box>
           </Box>
         </Box>
