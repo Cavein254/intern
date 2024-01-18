@@ -46,9 +46,6 @@ const Job = ({ items }) => {
             <h6>Ksh 120,000</h6>
           </Box>
         </Box>
-        <Box>
-          <Box>{description}</Box>
-        </Box>
       </Box>
     </Box>
   );
