@@ -6,7 +6,7 @@ import Subscribe from '@/components/subscribe/Subscribe';
 import Team from '@/components/team/Team';
 import Testimonials from '@/components/testimonial/Testimonials';
 import { Box } from '@mui/material';
-// export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (
