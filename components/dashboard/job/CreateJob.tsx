@@ -15,7 +15,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const CreateJob = () => {
@@ -25,7 +24,10 @@ const CreateJob = () => {
   const [locationType, setLocation] = useState('ONSITE');
   const [jobType, setJob] = useState('PERMANENT');
   const [expiresAt, setExpiresAt] = useState(dayjs(Date.now()));
-
+  const ReactQuill = useMemo(
+    () => dynamic(() => import('react-quill'), { ssr: false }),
+    []
+  );
   const handleChangeLocation = (e) => {
     e.preventDefault();
     setLocation(e.target.value);
