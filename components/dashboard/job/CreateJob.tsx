@@ -14,17 +14,20 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const CreateJob = () => {
+  const { data: session } = useSession();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
   const [locationType, setLocation] = useState('ONSITE');
   const [jobType, setJob] = useState('PERMANENT');
   const [expiresAt, setExpiresAt] = useState(dayjs(Date.now()));
+  const [error, setError] = useState('');
 
   const handleChangeLocation = (e) => {
     e.preventDefault();
@@ -43,19 +46,34 @@ const CreateJob = () => {
 
   const myDate = () => {
     const newDate = dayjs(expiresAt).format('MM/DD/YYYY');
-    return newDate;
+    return new Date(newDate);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = {
+    const data = {
       title,
       jobType,
       locationType,
       engagement,
       description,
       expiresAt: myDate(),
+      userId: session?.userId,
     };
-    console.log(userData);
+    fetch('/api/job/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          window.location.replace('/dashboard');
+        } else {
+          setError('An Error occured saving data to the database');
+        }
+      })
+      .catch((err) => setError('Unable to connect to database'));
   };
   return (
     <Box
@@ -64,6 +82,26 @@ const CreateJob = () => {
         mx: '4%',
       }}
     >
+      {error && (
+        <Box
+          sx={{
+            backgroundColor: 'red',
+            mx: '2rem',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              color: 'white',
+              fontSize: '0.8rem',
+            }}
+          >
+            {error}
+          </Typography>
+        </Box>
+      )}
       <form onSubmit={handleSubmit}>
         <CustomTextField
           variant="outlined"
