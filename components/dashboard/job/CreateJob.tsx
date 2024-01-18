@@ -47,7 +47,7 @@ const CreateJob = () => {
 
   const myDate = () => {
     const newDate = dayjs(expiresAt).format('MM/DD/YYYY');
-    return newDate;
+    return new Date(newDate);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
