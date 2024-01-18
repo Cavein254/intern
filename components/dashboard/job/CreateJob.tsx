@@ -55,7 +55,6 @@ const CreateJob = () => {
       description,
       expiresAt: myDate(),
     };
-    console.log(userData);
   };
   return (
     <Box
