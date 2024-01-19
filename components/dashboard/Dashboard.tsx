@@ -1,6 +1,7 @@
 'use client';
-import { Box, Card, Typography } from '@mui/material';
+import { Box, Button, Card, Typography } from '@mui/material';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { AiFillFilter } from 'react-icons/ai';
 import SearchOverlay from '../searchoverlay/SearchOverlay';
@@ -18,6 +19,8 @@ interface ItemProps {
 
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
+  const { data: session } = useSession();
+  console.log();
 
   const fetchJobs = async () => {
     const response = await axios
@@ -106,6 +109,20 @@ const Dashboard = () => {
             </Typography>
           </Box>
           <Box className="dashboard-category">{allStats}</Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'right',
+              border: '1px red solid',
+            }}
+          >
+            {' '}
+            {session?.position === 'EMPLOYER' && (
+              <Button variant="contained">
+                <a href="/employer/job/create">Create Job</a>
+              </Button>
+            )}
+          </Box>
           <Box>
             <Box className="dashboard-filter">
               <Box>
