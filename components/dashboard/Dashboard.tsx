@@ -7,6 +7,15 @@ import SearchOverlay from '../searchoverlay/SearchOverlay';
 import Job from './job/Job';
 import './styles.css';
 
+interface ItemProps {
+  title: string | null;
+  JobType: string | null;
+  engagement: string | null;
+  locationType: string | null;
+  description: string | null;
+  id: string | null;
+}
+
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
 
@@ -152,10 +161,16 @@ const Dashboard = () => {
             <SearchOverlay />
           </Box>
           <Box className="dashboard-jobs">
-            <Box className="dashboard-job-list">
-              {jobs?.map((items) => (
-                <Job key={items.id} items={items} />
-              ))}
+            <Box>
+              {jobs.length > 0 ? (
+                <Box className="dashboard-job-list">
+                  {jobs?.map((items: ItemProps) => (
+                    <Job key={items.id} items={items} />
+                  ))}
+                </Box>
+              ) : (
+                <h1>No Jobs Currently. Check with us later</h1>
+              )}
             </Box>
           </Box>
         </Box>
