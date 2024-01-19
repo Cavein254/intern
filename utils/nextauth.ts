@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import { AuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { redirect } from 'next/navigation';
 const prisma = new PrismaClient();
 
 export const authOptions: AuthOptions = {
@@ -17,10 +18,6 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log('on signin');
-      console.log('on signin');
-      console.log('on signin');
-      console.log('on signin');
       const response = await axios.post(
         process.env.NEXTAUTH_URL + '/api/user',
         {
@@ -29,28 +26,10 @@ export const authOptions: AuthOptions = {
           name: profile?.name,
         }
       );
-      if (response.status === 202) {
+      if (response.status === 201) {
         return true;
       }
-      //   const data = {
-      //     email: profile?.email,
-      //     image: profile?.picture,
-      //     name: profile?.name,
-      //   };
-      //   const response = await axios.post(
-      //     process.env.NEXTAUTH_URL + '/api/user',
-      //     data
-      //   );
-      //   if (response) {
-      //     return true;
-      //   }
-      //   return true;
-      // }
-      // if (response.status === 200) {
-      //   console.log('on 200');
-      //   return true;
-      // }
-      return true;
+      return redirect('/signup');
     },
     async redirect({ url, baseUrl }) {
       const newUrl = baseUrl + '/dashboard';
@@ -60,6 +39,7 @@ export const authOptions: AuthOptions = {
       session.userId = user.id;
       session.position = user.position;
       session.role = user.role;
+      session.image = user.image;
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {

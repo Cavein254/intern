@@ -20,6 +20,7 @@ interface ItemProps {
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
   const { data: session } = useSession();
+  console.log(session);
 
   const fetchJobs = async () => {
     const response = await axios
