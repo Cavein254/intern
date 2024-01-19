@@ -12,7 +12,7 @@ export const UserExists = async (req: NextRequest, res: NextResponse) => {
     });
     if (!user) {
       console.log('early retirement ');
-      return NextResponse.redirect(`${process.env.NEXTAUTH_URL}\signup`);
+      return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/signup`);
     }
     const newUser = await prisma.user.update({
       where: {
@@ -32,6 +32,6 @@ export const UserExists = async (req: NextRequest, res: NextResponse) => {
     });
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (e) {
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}\signup`);
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/signup`);
   }
 };
