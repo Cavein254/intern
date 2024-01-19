@@ -10,22 +10,24 @@ export const UserExists = async (req: NextRequest, res: NextResponse) => {
         email,
       },
     });
-    const newUser = await prisma.user.update({
-      where: {
-        email,
-      },
-      data: {
-        image: data?.image,
-      },
-    });
-    const newProfile = await prisma.profile.create({
-      data: {
-        userId: user?.id,
-        email,
-        image: data?.image,
-        name: data?.name,
-      },
-    });
+    if (!user) {
+      const user = await prisma.user.create({
+        data: {
+          name: data.name,
+          email: data.email,
+          image: data.image,
+        },
+      });
+    } else {
+      const newUser = await prisma.user.update({
+        where: {
+          email,
+        },
+        data: {
+          image: data?.image,
+        },
+      });
+    }
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (e) {
     return NextResponse.json(

@@ -28,7 +28,7 @@ export const authOptions: AuthOptions = {
       );
       const status = await response.status;
       if (status !== 201) {
-        return false;
+        return true;
       }
       return true;
     },

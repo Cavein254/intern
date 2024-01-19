@@ -1,8 +1,8 @@
 export const HeaderLinks = [
   {
     id: 1,
-    name: 'Home',
-    path: '/',
+    name: 'Dashboard',
+    path: '/dashboard',
   },
   {
     id: 2,

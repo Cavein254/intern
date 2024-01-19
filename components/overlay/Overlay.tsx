@@ -1,9 +1,10 @@
-"use client"
+'use client';
 import { Box, Stack } from '@mui/system';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { BsFan } from 'react-icons/bs';
 
 import { Typography } from '@mui/material';
+import { signOut } from 'next-auth/react';
 import { BiLogInCircle } from 'react-icons/bi';
 import { HeaderLinks } from '../header/LinkData';
 import './styles.css';
@@ -36,7 +37,7 @@ const Overlay = ({ isOpen, setIsOpen }: Props) => {
         </Box>
         <Box className="overlay-links-wrapper">{links}</Box>
       </Box>
-      <Box className="overlay-bottom">
+      <Box className="overlay-bottom" onClick={() => signOut()}>
         <BiLogInCircle className="overlay-icon" />
         <Typography
           variant="h5"
