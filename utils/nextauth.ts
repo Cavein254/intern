@@ -27,6 +27,9 @@ export const authOptions: AuthOptions = {
         data
       );
       const status = await response.status;
+      if (status !== 201) {
+        return false;
+      }
       return true;
     },
     async redirect({ url, baseUrl }) {
