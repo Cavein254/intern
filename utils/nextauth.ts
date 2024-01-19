@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import { AuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { redirect } from 'next/navigation';
 const prisma = new PrismaClient();
 
 export const authOptions: AuthOptions = {
@@ -18,18 +17,17 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      const data = {
+        email: profile?.email,
+        image: profile?.picture,
+        name: profile?.name,
+      };
       const response = await axios.post(
         process.env.NEXTAUTH_URL + '/api/user',
-        {
-          email: profile?.email,
-          image: profile?.picture,
-          name: profile?.name,
-        }
+        data
       );
-      if (response.status === 201) {
-        return true;
-      }
-      return redirect('/signup');
+      const status = await response.status;
+      return true;
     },
     async redirect({ url, baseUrl }) {
       const newUrl = baseUrl + '/dashboard';
