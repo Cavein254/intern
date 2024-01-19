@@ -119,7 +119,15 @@ const Dashboard = () => {
             {' '}
             {session?.position === 'EMPLOYER' && (
               <Button variant="contained">
-                <a href="/employer/job/create">Create Job</a>
+                <a href="/employer/job/create">
+                  <Typography
+                    sx={{
+                      color: 'white',
+                    }}
+                  >
+                    Create Job
+                  </Typography>
+                </a>
               </Button>
             )}
           </Box>
