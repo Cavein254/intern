@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { BsFan } from 'react-icons/bs';
@@ -30,11 +30,11 @@ const StyledSignUp = styled(Button)`
 `;
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   const { data: session } = useSession();
+  console.log(session);
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -99,11 +99,28 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              <MenuItem>
+                <Typography textAlign="center">
+                  <a href="/dashboard">Available Jobs</a>
+                </Typography>
+              </MenuItem>
+              {session?.role === 'ADMIN' && (
+                <MenuItem>
+                  <Typography textAlign="center">Admin</Typography>
                 </MenuItem>
-              ))}
+              )}
+              {session?.position === 'EMPLOYER' && (
+                <MenuItem>
+                  <Typography textAlign="center">
+                    <a href="/employer/job/create">Create Job</a>
+                  </Typography>
+                </MenuItem>
+              )}
+              <MenuItem>
+                <Typography textAlign="center" onClick={() => signOut()}>
+                  Logout
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         ) : (
