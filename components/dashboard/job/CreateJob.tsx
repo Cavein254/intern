@@ -25,6 +25,7 @@ const CreateJob = () => {
     []
   );
   const { data: session } = useSession();
+  console.log(session);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [engagement, setEngagement] = useState('FULLTIME');
