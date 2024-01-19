@@ -1,5 +1,6 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
+import axios from 'axios';
 import { AuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 const prisma = new PrismaClient();
@@ -16,6 +17,13 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      const response = axios.post(process.env.NEXTAUTH_URL + '/api/user', {
+        email: profile?.email,
+      });
+      console.log('firstfirstfirstfirst');
+      console.log('firstfirstfirstfirst');
+      console.log('firstfirstfirstfirst');
+      console.log(response.data);
       return true;
     },
     async redirect({ url, baseUrl }) {
