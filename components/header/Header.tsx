@@ -31,10 +31,8 @@ const StyledSignUp = styled(Button)`
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   const { data: session } = useSession();
-  console.log(session);
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };

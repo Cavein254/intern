@@ -20,7 +20,6 @@ interface ItemProps {
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
   const { data: session } = useSession();
-  console.log();
 
   const fetchJobs = async () => {
     const response = await axios
@@ -113,7 +112,7 @@ const Dashboard = () => {
             sx={{
               display: 'flex',
               justifyContent: 'right',
-              border: '1px red solid',
+              color: 'white',
             }}
           >
             {' '}

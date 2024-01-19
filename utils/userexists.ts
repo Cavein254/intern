@@ -12,16 +12,27 @@ export const UserExists = async (req: NextRequest, res: NextResponse) => {
       },
     });
     if (!profile) {
-      return NextResponse.json({
-        status: 'ok',
-      });
+      try {
+        const user = await prisma.user.findFirst({
+          where: {
+            email,
+          },
+        });
+        const newProfile = await prisma.profile.create({
+          data: {
+            userId: user?.id,
+            email,
+            image: data?.image,
+            name: data?.name,
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      return NextResponse.json({ success: true }, { status: 201 });
     }
-    return NextResponse.json({
-      status: 'false',
-    });
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (e) {
-    return NextResponse.json({
-      msg: 'Unable to connect to server',
-    });
+    return NextResponse.json({ success: false }, { status: 501 });
   }
 };

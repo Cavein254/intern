@@ -17,13 +17,39 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      const response = axios.post(process.env.NEXTAUTH_URL + '/api/user', {
-        email: profile?.email,
-      });
-      console.log('firstfirstfirstfirst');
-      console.log('firstfirstfirstfirst');
-      console.log('firstfirstfirstfirst');
-      console.log(response.data);
+      console.log('on signin');
+      console.log('on signin');
+      console.log('on signin');
+      console.log('on signin');
+      const response = await axios.post(
+        process.env.NEXTAUTH_URL + '/api/user',
+        {
+          email: profile?.email,
+          image: profile?.picture,
+          name: profile?.name,
+        }
+      );
+      if (response.status === 202) {
+        return true;
+      }
+      //   const data = {
+      //     email: profile?.email,
+      //     image: profile?.picture,
+      //     name: profile?.name,
+      //   };
+      //   const response = await axios.post(
+      //     process.env.NEXTAUTH_URL + '/api/user',
+      //     data
+      //   );
+      //   if (response) {
+      //     return true;
+      //   }
+      //   return true;
+      // }
+      // if (response.status === 200) {
+      //   console.log('on 200');
+      //   return true;
+      // }
       return true;
     },
     async redirect({ url, baseUrl }) {
