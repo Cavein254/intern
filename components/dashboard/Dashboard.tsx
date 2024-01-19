@@ -194,7 +194,7 @@ const Dashboard = () => {
                   ))}
                 </Box>
               ) : (
-                <h1>No Jobs Currently. Check with us later</h1>
+                <h1>No Internships Currently Available. Check with Us later</h1>
               )}
             </Box>
           </Box>

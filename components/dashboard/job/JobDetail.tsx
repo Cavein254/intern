@@ -1,4 +1,7 @@
+'use client';
 import { Box, Button, Typography } from '@mui/material';
+import dynamic from 'next/dynamic';
+import { useMemo } from 'react';
 import { AiOutlineFieldNumber } from 'react-icons/ai';
 import { BiMoneyWithdraw, BiTime } from 'react-icons/bi';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
@@ -13,7 +16,11 @@ interface ItemProps {
   description: string | null;
   id: string | null;
 }
-const Job = ({ items }: { items: ItemProps }) => {
+const JobDetails = ({ items }: { items: ItemProps }) => {
+  const ReactQuill = useMemo(
+    () => dynamic(() => import('react-quill'), { ssr: false }),
+    []
+  );
   const link = `/job/${items?.id}`;
   return (
     <Box
@@ -65,8 +72,9 @@ const Job = ({ items }: { items: ItemProps }) => {
           </Box>
         </Box>
       </Box>
+      <ReactQuill value={items.description} readOnly={true} theme={'bubble'} />
     </Box>
   );
 };
 
-export default Job;
+export default JobDetails;
