@@ -1,14 +1,22 @@
 'use client';
-import { Box, Card, Typography } from '@mui/material';
+
+import { Box, Button, Card, Typography } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { AiFillFilter } from 'react-icons/ai';
-import SearchOverlay from '../searchoverlay/SearchOverlay';
-import Job from './job/Job';
+import { useSession } from 'next-auth/react';
 import './styles.css';
+
+interface ItemProps {
+  title: string | null;
+  JobType: string | null;
+  engagement: string | null;
+  locationType: string | null;
+  description: string | null;
+  id: string | null;
+}
 
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
+  const { data: session } = useSession();
 
   const fetchJobs = async () => {
     const response = await axios
@@ -97,6 +105,29 @@ const Dashboard = () => {
             </Typography>
           </Box>
           <Box className="dashboard-category">{allStats}</Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'right',
+              color: 'white',
+            }}
+          >
+            {' '}
+            {session?.position === 'EMPLOYER' && (
+              <Button variant="contained">
+                <a href="/employer/job/create">
+                  <Typography
+                    sx={{
+                      color: 'white',
+                    }}
+                  >
+                    Create Job
+                  </Typography>
+                </a>
+              </Button>
+            )}
+          </Box>
+          <Box className="dashboard-category">{allStats}</Box>
           <Box>
             <Box className="dashboard-filter">
               <Box>
@@ -152,6 +183,19 @@ const Dashboard = () => {
             <SearchOverlay />
           </Box>
           <Box className="dashboard-jobs">
+            <Box>
+              {jobs.length > 0 ? (
+                <Box className="dashboard-job-list">
+                  {jobs?.map((items: ItemProps) => (
+                    <Job key={items.id} items={items} />
+                  ))}
+                </Box>
+              ) : (
+                <div>
+                  <h1>No Internships Currently Available.</h1>
+                  <p>Check with Us later</p>
+                </div>
+              )}
             <Box className="dashboard-job-list">
               {jobs?.map((items) => (
                 <Job key={items.id} items={items} />

@@ -8,7 +8,7 @@ import { Providers } from './provider';
 
 const metadata: Metadata = {
   title: 'INTERN CONNECT',
-  description: 'The best place for intern resources',
+  description: 'The best place for intern to connect',
 };
 
 export default function RootLayout({
