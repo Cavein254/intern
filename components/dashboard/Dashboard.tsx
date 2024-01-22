@@ -1,9 +1,13 @@
-'use client';
+"use client";
 
-import { Box, Button, Card, Typography } from '@mui/material';
-import axios from 'axios';
-import { useSession } from 'next-auth/react';
-import './styles.css';
+import { Box, Button, Card, Typography } from "@mui/material";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import "./styles.css";
+import SearchOverlay from "../searchoverlay/SearchOverlay";
+import { AiFillFilter } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import Job from "./job/Job";
 
 interface ItemProps {
   title: string | null;
@@ -20,7 +24,7 @@ const Dashboard = () => {
 
   const fetchJobs = async () => {
     const response = await axios
-      .get('/api/job')
+      .get("/api/job")
       .then((res) => setJobs(res.data));
     return response;
   };
@@ -30,17 +34,17 @@ const Dashboard = () => {
   const jobStats = [
     {
       id: 1,
-      jobType: 'Remote Jobs',
+      jobType: "Remote Jobs",
       stat: 80,
     },
     {
       id: 2,
-      jobType: 'Hybrid Jobs',
+      jobType: "Hybrid Jobs",
       stat: 67,
     },
     {
       id: 3,
-      jobType: 'Onsite Jobs',
+      jobType: "Onsite Jobs",
       stat: 100,
     },
   ];
@@ -50,18 +54,18 @@ const Dashboard = () => {
         className="dashboard-remote"
         key={job.id}
         sx={{
-          fontSize: '1.4rem',
-          color: '#fff',
-          padding: '1rem 2rem',
-          backgroundColor: '#F37C0C',
+          fontSize: "1.4rem",
+          color: "#fff",
+          padding: "1rem 2rem",
+          backgroundColor: "#F37C0C",
         }}
       >
         <Typography
           variant="h4"
           sx={{
-            fontFamily: 'Raleway',
-            fontWeight: '900',
-            fontSize: '1rem',
+            fontFamily: "Raleway",
+            fontWeight: "900",
+            fontSize: "1rem",
           }}
         >
           {job.jobType}
@@ -69,9 +73,9 @@ const Dashboard = () => {
         <Typography
           variant="h5"
           sx={{
-            fontFamily: 'Raleway',
-            fontWeight: '300',
-            fontSize: '1.4rem',
+            fontFamily: "Raleway",
+            fontWeight: "300",
+            fontSize: "1.4rem",
           }}
         >
           {job.stat}
@@ -80,104 +84,103 @@ const Dashboard = () => {
     );
   });
   return (
-    <>
-      <Box>
-        <Box className="job-header">
-          <Box className="dashboard-text">
-            <Typography
-              variant="h1"
-              sx={{
-                fontFamily: 'Raleway',
-                fontWeight: '900',
-                fontSize: '2rem',
-              }}
-            >
-              Browse Available Jobs
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{
-                fontFamily: 'Raleway',
-                fontWeight: '300',
-              }}
-            >
-              Search the various jobs that our site has to offer.
-            </Typography>
-          </Box>
-          <Box className="dashboard-category">{allStats}</Box>
-          <Box
+    <Box>
+      <Box className="job-header">
+        <Box className="dashboard-text">
+          <Typography
+            variant="h1"
             sx={{
-              display: 'flex',
-              justifyContent: 'right',
-              color: 'white',
+              fontFamily: "Raleway",
+              fontWeight: "900",
+              fontSize: "2rem",
             }}
           >
-            {' '}
-            {session?.position === 'EMPLOYER' && (
-              <Button variant="contained">
-                <a href="/employer/job/create">
-                  <Typography
-                    sx={{
-                      color: 'white',
-                    }}
-                  >
-                    Create Job
-                  </Typography>
-                </a>
-              </Button>
-            )}
-          </Box>
-          <Box className="dashboard-category">{allStats}</Box>
-          <Box>
-            <Box className="dashboard-filter">
-              <Box>
+            Browse Available Jobs
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              fontFamily: "Raleway",
+              fontWeight: "300",
+            }}
+          >
+            Search the various jobs that our site has to offer.
+          </Typography>
+        </Box>
+        <Box className="dashboard-category">{allStats}</Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "right",
+            color: "white",
+          }}
+        >
+          {" "}
+          {session?.position === "EMPLOYER" && (
+            <Button variant="contained">
+              <a href="/employer/job/create">
                 <Typography
-                  variant="h4"
                   sx={{
-                    fontFamily: 'Raleway',
-                    fontSize: '1rem',
-                    fontWeight: '300',
+                    color: "white",
                   }}
                 >
-                  JOBS
+                  Create Job
                 </Typography>
-              </Box>
-              <Box
+              </a>
+            </Button>
+          )}
+        </Box>
+        <Box className="dashboard-category">{allStats}</Box>
+        <Box>
+          <Box className="dashboard-filter">
+            <Box>
+              <Typography
+                variant="h4"
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
+                  fontFamily: "Raleway",
+                  fontSize: "1rem",
+                  fontWeight: "300",
                 }}
               >
-                <AiFillFilter />
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontFamily: 'Raleway',
-                    fontSize: '1rem',
-                    fontWeight: '300',
-                    color: '#A9A9A9',
-                    marginLeft: '.5rem',
-                  }}
-                >
-                  Filter By
-                </Typography>
-              </Box>
+                JOBS
+              </Typography>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <AiFillFilter />
               <Typography
                 variant="h6"
                 sx={{
-                  fontFamily: 'Raleway',
-                  fontSize: '.8rem',
-                  fontWeight: '900',
+                  fontFamily: "Raleway",
+                  fontSize: "1rem",
+                  fontWeight: "300",
+                  color: "#A9A9A9",
+                  marginLeft: ".5rem",
                 }}
               >
-                78 Jobs Found
+                Filter By
               </Typography>
             </Box>
           </Box>
+          <Box>
+            <Typography
+              variant="h6"
+              sx={{
+                fontFamily: "Raleway",
+                fontSize: ".8rem",
+                fontWeight: "900",
+              }}
+            >
+              78 Jobs Found
+            </Typography>
+          </Box>
         </Box>
+
         <Box className="dashboard-main">
           <Box className="dashboard-search">
             <SearchOverlay />
@@ -196,15 +199,16 @@ const Dashboard = () => {
                   <p>Check with Us later</p>
                 </div>
               )}
-            <Box className="dashboard-job-list">
-              {jobs?.map((items) => (
-                <Job key={items.id} items={items} />
-              ))}
+              <Box className="dashboard-job-list">
+                {jobs?.map((items) => (
+                  <Job key={items.id} items={items} />
+                ))}
+              </Box>
             </Box>
           </Box>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
