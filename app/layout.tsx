@@ -1,6 +1,7 @@
 'use client';
 import Header from '@/components/header/Header';
 import type { Metadata } from 'next';
+import { Session } from 'next-auth';
 import { usePathname } from 'next/navigation';
 import './globals.css';
 import { Providers } from './provider';
@@ -12,15 +13,17 @@ const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session,
 }: {
   children: React.ReactNode;
+  session: Session;
 }) {
   const pathName = usePathname();
 
   return (
     <html lang="en">
       <body>
-        <Providers>
+        <Providers session={session}>
           {pathName === '/signin' ||
           pathName === '/admin' ||
           pathName === '/signup' ? (

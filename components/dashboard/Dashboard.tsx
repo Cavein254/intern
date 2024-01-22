@@ -1,11 +1,8 @@
 'use client';
+
 import { Box, Button, Card, Typography } from '@mui/material';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { AiFillFilter } from 'react-icons/ai';
-import SearchOverlay from '../searchoverlay/SearchOverlay';
-import Job from './job/Job';
 import './styles.css';
 
 interface ItemProps {
@@ -130,6 +127,7 @@ const Dashboard = () => {
               </Button>
             )}
           </Box>
+          <Box className="dashboard-category">{allStats}</Box>
           <Box>
             <Box className="dashboard-filter">
               <Box>
@@ -198,6 +196,10 @@ const Dashboard = () => {
                   <p>Check with Us later</p>
                 </div>
               )}
+            <Box className="dashboard-job-list">
+              {jobs?.map((items) => (
+                <Job key={items.id} items={items} />
+              ))}
             </Box>
           </Box>
         </Box>

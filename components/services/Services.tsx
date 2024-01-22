@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { ServiceData } from './servicedata';
 import './syles.css';
 const Services = () => {
-  const services = ServiceData.map((service) => {
+  const services = ServiceData?.map((service) => {
     return (
       <Box
         className="services-wrapper"

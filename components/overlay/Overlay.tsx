@@ -11,7 +11,7 @@ import './styles.css';
 
 type Props = {
   isOpen: Boolean;
-  setIsOpen(value: Boolean): () => void;
+  setIsOpen: (value: Boolean | any) => void;
 };
 const Overlay = ({ isOpen, setIsOpen }: Props) => {
   const links = HeaderLinks.map((link) => {

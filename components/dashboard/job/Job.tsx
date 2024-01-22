@@ -5,6 +5,7 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import { GiAbstract034 } from 'react-icons/gi';
 import './styles.css';
 
+
 interface ItemProps {
   title: string | null;
   JobType: string | null;
@@ -15,6 +16,7 @@ interface ItemProps {
 }
 const Job = ({ items }: { items: ItemProps }) => {
   const link = `/job/${items?.id}`;
+
   return (
     <Box
       sx={{
@@ -64,6 +66,7 @@ const Job = ({ items }: { items: ItemProps }) => {
             <p>Amaizing working culture</p>
           </Box>
         </Box>
+
       </Box>
     </Box>
   );
