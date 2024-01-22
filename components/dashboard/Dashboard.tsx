@@ -19,6 +19,7 @@ interface ItemProps {
 }
 
 const Dashboard = () => {
+  console.log("on dashbord");
   const [jobs, setJobs] = useState([]);
   const { data: session } = useSession();
 
