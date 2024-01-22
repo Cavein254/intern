@@ -19,7 +19,6 @@ interface ItemProps {
 }
 
 const Dashboard = () => {
-  console.log("on dashbord");
   const [jobs, setJobs] = useState([]);
   const { data: session } = useSession();
 
@@ -131,7 +130,6 @@ const Dashboard = () => {
             </Button>
           )}
         </Box>
-        <Box className="dashboard-category">{allStats}</Box>
         <Box>
           <Box className="dashboard-filter">
             <Box>
@@ -200,11 +198,6 @@ const Dashboard = () => {
                   <p>Check with Us later</p>
                 </div>
               )}
-              <Box className="dashboard-job-list">
-                {jobs?.map((items) => (
-                  <Job key={items.id} items={items} />
-                ))}
-              </Box>
             </Box>
           </Box>
         </Box>
