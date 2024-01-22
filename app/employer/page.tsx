@@ -1,10 +1,13 @@
-import { getSessionsFromServer } from '@/middleware/serversession';
+"use client";
+import { getSessionsFromServer } from "@/middleware/serversession";
+import { useSession } from "next-auth/react";
 
 const page = async () => {
-  const user = await getSessionsFromServer();
+  // const user = await getSessionsFromServer();
+  const { data: session } = useSession();
   return (
     <div>
-      {user ? <h1>Welcome Employer </h1> : <h1>Unauthorized Access</h1>}
+      {session ? <h1>Welcome Employer </h1> : <h1>Unauthorized Access</h1>}
     </div>
   );
 };

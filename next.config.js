@@ -24,6 +24,7 @@ const nextConfig = {
     unoptimized: true,
   },
   output: "export",
+  distDir: "build",
 };
 
 module.exports = nextConfig;
