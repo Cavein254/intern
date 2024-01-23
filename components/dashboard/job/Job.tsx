@@ -1,10 +1,9 @@
-import { Box, Button, Typography } from '@mui/material';
-import { AiOutlineFieldNumber } from 'react-icons/ai';
-import { BiMoneyWithdraw, BiTime } from 'react-icons/bi';
-import { BsFillArrowRightCircleFill } from 'react-icons/bs';
-import { GiAbstract034 } from 'react-icons/gi';
-import './styles.css';
-
+import { Box, Button, Typography } from "@mui/material";
+import { AiOutlineFieldNumber } from "react-icons/ai";
+import { BiMoneyWithdraw, BiTime } from "react-icons/bi";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { GiAbstract034 } from "react-icons/gi";
+import "./styles.css";
 
 interface ItemProps {
   title: string | null;
@@ -14,6 +13,7 @@ interface ItemProps {
   description: string | null;
   id: string | null;
 }
+
 const Job = ({ items }: { items: ItemProps }) => {
   const link = `/job/${items?.id}`;
 
@@ -21,7 +21,7 @@ const Job = ({ items }: { items: ItemProps }) => {
     <Box
       sx={{
         boxShadow: 2,
-        width: '100%',
+        width: "100%",
       }}
       className="job-main-card"
     >
@@ -39,7 +39,7 @@ const Job = ({ items }: { items: ItemProps }) => {
           <Box className="job-apply-btn">
             <a href={link}>
               <Button variant="contained">
-                <Typography sx={{ color: 'white' }}>Apply</Typography>
+                <Typography sx={{ color: "white" }}>Apply</Typography>
                 <BsFillArrowRightCircleFill className="job-apply-icon" />
               </Button>
             </a>
@@ -66,7 +66,6 @@ const Job = ({ items }: { items: ItemProps }) => {
             <p>Amaizing working culture</p>
           </Box>
         </Box>
-
       </Box>
     </Box>
   );

@@ -1,12 +1,11 @@
 {
-  "name": "aries-0.0.2",
+  "name": "intern-0.0.1",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "prisma generate && next build",
-    "start": "server.js",
-    "lint": "next lint",
+    "start": "NODE_ENV=production node server.js",
     "postinstall": "prisma generate"
   },
   "dependencies": {

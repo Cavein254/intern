@@ -23,7 +23,6 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  output: "export",
   distDir: "build",
 };
 
